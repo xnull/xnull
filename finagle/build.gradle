@@ -1,0 +1,20 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    testCompile "org.scala-lang:scala-library:2.11.7"
+
+    compile 'com.twitter:finagle-http_2.11:6.28.0'
+    compile 'com.twitter:finagle-httpx_2.11:6.28.0'
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'bynull.Client'
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+}

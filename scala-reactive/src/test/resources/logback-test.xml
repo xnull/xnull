@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date{yy/MM/dd HH:mm:ss.SSS} %-5level %-10.10thread | %20.20logger{20} | %m%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.bynull" level="trace"/>
+
+    <root level="debug">
+        <appender-ref ref="console" />
+    </root>
+</configuration>

@@ -1,0 +1,40 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile 'net.databinder.dispatch:dispatch-core_2.11:0.11.3'
+
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.6.3'
+
+    compile 'org.springframework.social:spring-social-twitter:1.1.2.RELEASE'
+
+    testCompile "org.scala-lang:scala-library:2.11.7"
+    testCompile "org.scalatest:scalatest_2.11:2.2.5"
+    testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+task run(type: JavaExec, dependsOn: classes) {
+    main = 'com.bynull.ReactiveApp'
+    classpath sourceSets.main.runtimeClasspath
+    classpath configurations.runtime
+}
+
+test {
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
+task spec(dependsOn: ['testClasses'], type: JavaExec) {
+    main = 'org.scalatest.tools.Runner'
+    args = ['-R', 'build/classes/test', '-o']
+    classpath = sourceSets.test.runtimeClasspath
+}

@@ -1,0 +1,23 @@
+apply plugin: 'scala'
+apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile 'ch.qos.logback:logback-classic:1.0.13'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.module:jackson-module-scala_2.11:2.6.3'
+
+    testCompile "org.scala-lang:scala-library:2.11.7"
+    testCompile "org.scalatest:scalatest_2.11:2.2.5"
+    testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+task execute(type:JavaExec) {
+    main = "chess.Chess"
+    classpath = sourceSets.main.runtimeClasspath
+}
